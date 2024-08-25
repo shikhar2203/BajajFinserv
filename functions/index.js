@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/.netlify/functions/bfhl", async (req, res) => {
+app.get("/bfhl", async (req, res) => {
 
     return res.json({operationCode: "1"});
 });

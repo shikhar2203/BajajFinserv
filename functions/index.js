@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/bfhl", async (req, res) => {
+app.get("/.netlify/functions/bfhl", async (req, res) => {
 
     return res.json({operationCode: "1"});
 });
@@ -48,5 +48,3 @@ module.exports.handler = async(event, context) => {
     const result = await handler(event, context);
     return result;
 }
-
-app.listen(PORT, () => console.log( `Server is running on port ${PORT}` ));

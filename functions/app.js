@@ -2,15 +2,20 @@ const express = require("express");
 const ServerlessHttp = require("serverless-http");
 
 const app = express();
-
+const router = express.Router();
+//const PORT = 3000;
 app.use(express.json());
 
-app.get("/.netlify/functions/index", async (req, res) => {
+router.get("/", (req, res) => {
+    return res.json({GET: "/bfhl", POST: "/bfhl"});
+});
+
+router.get("/bfhl", (req, res) => {
 
     return res.json({operationCode: "1"});
 });
 
-app.post("/bfhl", async (req, res) => {
+router.post("/bfhl", (req, res) => {
     const body = req.body.data;
     console.log(body);
 
@@ -42,9 +47,8 @@ app.post("/bfhl", async (req, res) => {
 
 });
 
-const handler = ServerlessHttp(app);
+app.use("/", router);
 
-module.exports.handler = async(event, context) => {
-    const result = await handler(event, context);
-    return result;
-}
+module.exports.handler = ServerlessHttp(app);
+
+//app.listen(PORT, ()=> console.log("Server Started"));

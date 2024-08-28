@@ -1,9 +1,9 @@
 const express = require("express");
-const ServerlessHttp = require("serverless-http");
 
 const app = express();
 const router = express.Router();
-//const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 app.use(express.json());
 
 router.get("/", (req, res) => {
@@ -49,6 +49,4 @@ router.post("/bfhl", (req, res) => {
 
 app.use("/", router);
 
-module.exports.handler = ServerlessHttp(app);
-
-//app.listen(PORT, ()=> console.log("Server Started"));
+app.listen(PORT, ()=> console.log(`Server Started on Port ${PORT}`));
